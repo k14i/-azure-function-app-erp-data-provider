@@ -13,5 +13,8 @@ start-trace:
 start-profile:
 	func start --verbose --python --debug --trace --profile
 
+call-get:
+	curl -X GET -H "Content-Type: application/json" "http://localhost:7071/api/HttpTrigger-erp-data-provider"
+
 call-post:
 	curl -X POST -H "Content-Type: application/json" -d "{}" "http://localhost:7071/api/HttpTrigger-erp-data-provider"

@@ -28,10 +28,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             "headers": {k: v for k, v in req.headers.items()},
             "params": {k: v for k, v in req.params.items()},
             "route_params": {k: v for k, v in req.route_params.items()},
-            "body": req.get_json()
         },
         "data": data_provider.data
     }
+
+    if req.method in ['POST', 'PUT', 'PATCH']:
+        res['request']['body'] = req.get_json()
 
     if data_provider.data:
         return func.HttpResponse(json.dumps(res), status_code=200, mimetype='application/json', charset='utf-8', headers={'Content-Type': 'application/json'})
